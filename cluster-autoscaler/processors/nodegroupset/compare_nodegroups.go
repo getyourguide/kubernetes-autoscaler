@@ -25,6 +25,9 @@ import (
 )
 
 const (
+	// MaxCapacityDifferenceRatio describes how Node.Status.Capacity can differ between
+	// groups in the same NodeGroupSet
+	MaxCapacityDifferenceRatio = 0.05
 	// MaxAllocatableDifferenceRatio describes how Node.Status.Allocatable can differ between
 	// groups in the same NodeGroupSet
 	MaxAllocatableDifferenceRatio = 0.05
@@ -76,15 +79,10 @@ func IsNodeInfoSimilar(n1, n2 *schedulernodeinfo.NodeInfo) bool {
 			free[res] = append(free[res], freeRes)
 		}
 	}
-	// For capacity we require exact match.
-	// If this is ever changed, enforcing MaxCoresTotal and MaxMemoryTotal limits
-	// as it is now may no longer work.
-	for _, qtyList := range capacity {
-		if len(qtyList) != 2 || qtyList[0].Cmp(qtyList[1]) != 0 {
-			return false
-		}
+	// We allow resource quantities to be within a few % of each other
+	if !compareResourceMapsWithTolerance(capacity, MaxCapacityDifferenceRatio) {
+		return false
 	}
-	// For allocatable and free we allow resource quantities to be within a few % of each other
 	if !compareResourceMapsWithTolerance(allocatable, MaxAllocatableDifferenceRatio) {
 		return false
 	}
