@@ -16,7 +16,7 @@ pipeline:
     dockerfile: cluster-autoscaler/Dockerfile
     repo: hub.gyg.io/devops/cluster-autoscaler
     tags:
-      - v1.15.0-getyourguide
+      - v1.15.1-getyourguide
       - v${DRONE_BUILD_NUMBER}
     when:
       branch: cluster-autoscaler-release-1.15-getyourguide
