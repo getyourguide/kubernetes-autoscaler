@@ -6,7 +6,7 @@
 # Go tests use this curl binary for integration tests.
 #
 
-FROM ubuntu:trusty
+FROM 890546402176.dkr.ecr.eu-central-1.amazonaws.com/hubdockercom/ubuntu:trusty
 
 RUN apt-get update && \
     apt-get upgrade -y && \

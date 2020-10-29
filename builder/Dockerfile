@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM golang:1.12.1
+FROM 890546402176.dkr.ecr.eu-central-1.amazonaws.com/hubdockercom/golang:1.12.1
 LABEL maintainer="Marcin Wielgus <mwielgus@google.com>"
 
 ENV GOPATH /gopath/

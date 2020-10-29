@@ -3,7 +3,7 @@ workspace:
   path: src/k8s.io/autoscaler
 pipeline:
   build_binary:
-    image: golang:1.12.1
+    image: 890546402176.dkr.ecr.eu-central-1.amazonaws.com/hubdockercom/golang:1.12.1
     commands:
       - cd cluster-autoscaler
       - GOOS=linux go build -o cluster-autoscaler
